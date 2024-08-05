@@ -25,7 +25,7 @@ function csvToJSON(csv) {
 }
 
 // Fetch and process the CSV data
-fetch('path/to/your/ooregon_fire.csv')
+fetch('data/ooregon_fire.csv')
     .then(response => response.text())
     .then(csvText => {
         const data = csvToJSON(csvText);
