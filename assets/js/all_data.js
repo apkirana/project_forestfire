@@ -34,9 +34,9 @@ fetch('assets/data/indonesia_fires_2023.geojson')
             markers = [];
 
             // Filter the data based on the selected date
-            const filteredFeatures = data.features.filter(feature => {
-                return feature.properties.acq_date === date;
-            });
+            const filteredFeatures = date 
+                ? data.features.filter(feature => feature.properties.acq_date === date)
+                : data.features;
 
             console.log('Filtered features:', filteredFeatures); // Log the filtered features
 
@@ -46,8 +46,6 @@ fetch('assets/data/indonesia_fires_2023.geojson')
             // Populate the table with the filtered data
             if (filteredFeatures.length > 0) {
                 filteredFeatures.forEach(feature => {
-                    console.log('Processing feature:', feature); // Log each feature being processed
-
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${feature.geometry.coordinates[1]}</td>
@@ -96,20 +94,13 @@ fetch('assets/data/indonesia_fires_2023.geojson')
             if (filteredFeatures.length > 0) {
                 const bounds = geojsonLayer.getBounds();
                 map.fitBounds(bounds);
-
-                // Automatically open the popup for the first marker
-                if (markers.length > 0) {
-                    map.setView(markers[0].getLatLng(), 13);
-                    markers[0].openPopup();
-                }
             } else {
                 map.setView([-2.5, 120], 5); // Reset to default view if no data matches
             }
         }
 
-        // Set the default date to January 1, 2023
-        const defaultDate = '2023-01-01';
-        updateMapAndTable(defaultDate);
+        // Initially display all data
+        updateMapAndTable(null);
 
         // Add event listener to apply filter based on selected date
         document.getElementById('filter-button').addEventListener('click', function() {
