@@ -9,12 +9,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var geojsonLayer;
 var markers = [];
 
-// Define a custom icon for the fire markers
-var fireIcon = L.icon({
-    iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Fire_icon.svg/1024px-Fire_icon.svg.png',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-    popupAnchor: [0, -32]
+// Define a custom icon for the fire markers as a red circle
+var fireIcon = L.divIcon({
+    html: '<div style="width: 20px; height: 20px; background-color: red; border-radius: 50%;"></div>',
+    className: '', // No additional CSS class needed
+    iconSize: [20, 20], // Size of the icon
+    iconAnchor: [10, 10], // Point of the icon which corresponds to the marker's location
+    popupAnchor: [0, -10] // Point from which the popup should open relative to the iconAnchor
 });
 
 // Load GeoJSON data

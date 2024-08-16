@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forest Fire Data - Simple Table</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #000; /* Ensure font color is black */
+        }
+
+        #data-table {
+            padding: 20px;
+            background: #f9f9f9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+            color: #000; /* Ensure table text color is black */
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <div id="data-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Brightness</th>
+                    <th>Date</th>
+                    <th>FRP</th>
+                    <th>Satellite</th>
+                    <th>Instrument</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <!-- Data rows will be inserted here dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Load GeoJSON data
+        fetch('assets/data/indonesia_fires_2023.geojson')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Data loaded:', data); // Debugging: Log the loaded data
+                const tableBody = document.getElementById('table-body');
+                tableBody.innerHTML = '';
+
+                // Ensure data.features exists and has elements
+                if (data.features && data.features.length > 0) {
+                    data.features.forEach(feature => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${feature.geometry.coordinates[1]}</td>
+                            <td>${feature.geometry.coordinates[0]}</td>
+                            <td>${feature.properties.brightness}</td>
+                            <td>${feature.properties.acq_date}</td>
+                            <td>${feature.properties.frp}</td>
+                            <td>${feature.properties.satellite}</td>
+                            <td>${feature.properties.instrument}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                } else {
+                    console.log('No features found in GeoJSON data.');
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td colspan="7">No data available in GeoJSON file.</td>`;
+                    tableBody.appendChild(row);
+                }
+            })
+            .catch(error => {
+                console.error('Error loading or processing data:', error);
+                const tableBody = document.getElementById('table-body');
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="7">Error loading data.</td>`;
+                tableBody.appendChild(row);
+            });
+    </script>
+</body>
+</html>
