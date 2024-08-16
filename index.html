@@ -3,39 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indonesia Forest Fire Map 2023</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="assets/css/styles.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <title>Forest Fire Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="bootstrap/startbootstrap/css/styles.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="assets/css/custom.css" rel="stylesheet">
 </head>
 <body>
-    <div id="controls">
-        <label for="date-select">Select Date:</label>
-        <input type="date" id="date-select" min="2023-01-01" max="2023-12-31" value="2023-01-01" />
-        <button id="filter-button">Apply Filter</button>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="border-end bg-white" id="sidebar-wrapper">
+            <div class="sidebar-heading border-bottom bg-light">Forest Fire Dashboard</div>
+            <div class="list-group list-group-flush">
+                <a href="index.html" class="list-group-item list-group-item-action list-group-item-light p-3">Dashboard</a>
+                <a href="all_data.html" class="list-group-item list-group-item-action list-group-item-light p-3">All Data</a>
+                <a href="simple_table.html" class="list-group-item list-group-item-action list-group-item-light p-3">Simple Table</a>
+            </div>
+        </div>
+        <!-- Page content wrapper -->
+        <div id="page-content-wrapper">
+            <!-- Top navigation -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                </div>
+            </nav>
+            <!-- Page content -->
+            <div class="container-fluid">
+                <h1 class="mt-4">Forest Fire Map</h1>
+                <div id="map" style="height: 600px;"></div>
+                <!-- Add your filter controls and other content here -->
+            </div>
+        </div>
     </div>
 
-    <div id="map"></div>
-
-    <div id="data-table">
-        <table>
-            <thead>
-                <tr>
-                    <th>Latitude</th>
-                    <th>Longitude</th>
-                    <th>Brightness</th>
-                    <th>Date</th>
-                    <th>FRP</th>
-                    <th>Satellite</th>
-                    <th>Instrument</th>
-                </tr>
-            </thead>
-            <tbody id="table-body">
-                <!-- Data rows will be inserted here dynamically -->
-            </tbody>
-        </table>
-    </div>
-
+    <!-- Bootstrap core JS -->
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS -->
+    <script src="bootstrap/js/scripts.js"></script>
+    <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
 </body>
 </html>
