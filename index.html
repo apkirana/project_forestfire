@@ -5,10 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Indonesia Forest Fire Map 2023</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="assets/css/styles.css" />  <!-- Optional custom styles -->
+    <link rel="stylesheet" href="assets/css/styles.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
+    <div id="controls">
+        <label for="province-select">Select Province:</label>
+        <select id="province-select">
+            <option value="all">All Provinces</option>
+            <!-- Add options dynamically with JavaScript -->
+        </select>
+        
+        <label for="date-select">Select Date:</label>
+        <input type="date" id="date-select" />
+
+        <button id="filter-button">Apply Filters</button>
+    </div>
     <div id="map" style="height: 600px;"></div>
 
     <script src="assets/js/main.js"></script>
